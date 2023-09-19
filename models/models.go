@@ -5,3 +5,13 @@ type Association struct {
 	DestID   string
 	Relation string
 }
+
+type Policy struct {
+	ID   string
+	Name string
+}
+
+type EntitlementFeature struct {
+	ID   string
+	Name string
+}

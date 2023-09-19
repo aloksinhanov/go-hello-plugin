@@ -1,6 +1,7 @@
 package main
 
 import (
+	common "commom"
 	"fmt"
 	"io/fs"
 	"os"
@@ -11,8 +12,12 @@ import (
 
 var assocs map[string]Association
 
+// Having dedicated methods for each opeartion allows the plugins to do only necessary checks
+// for the operation in concern.
 type Association interface {
-	CanAdd() bool
+	CanAdd(helper common.Helper, partnerId string, mapFromId string, mapToId string) bool
+	CanUpdate(helper common.Helper, partnerId string, mapFromId string, mapToId string) bool
+	CanDelete(helper common.Helper, partnerId string, mapFromId string, mapToId string) bool
 }
 
 func init() {
@@ -58,11 +63,16 @@ func init() {
 
 func main() {
 	ch := "NA"
+	h := common.Helper{}
 	for ch != "" {
 		fmt.Println("\nEnter relation to check if can be added: ")
 		fmt.Scanln(&ch)
+
+		partnerId := "123456"
+		mapFromId := "11111"
+		mapToId := "22222"
 		if assoc, found := assocs[ch]; found {
-			fmt.Println(assoc.CanAdd())
+			fmt.Println(assoc.CanAdd(h, partnerId, mapFromId, mapToId))
 		} else {
 			fmt.Println("Unknown relation.")
 		}

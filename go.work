@@ -4,4 +4,6 @@ use (
 	./core
 	./plugins/contactdevice
 	./plugins/contacttask
+	./common
+	./models
 )

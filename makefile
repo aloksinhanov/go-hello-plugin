@@ -1,7 +1,9 @@
-plugin-for-ide: 
-	go build -buildmode=plugin -gcflags="all=-N -l" -o plugins/contactdevice/contactdevice.so plugins/contactdevice/association.go
-	go build -buildmode=plugin -gcflags="all=-N -l" -o plugins/contacttask/contacttask.so plugins/contacttask/association.go
+plugin-for-ide:
+	cd ./plugins/contactdevice && echo $pwd && go mod tidy && go build -buildmode=plugin -gcflags="all=-N -l" -o contactdevice.so association.go && cd ../../
+	
+	cd ./plugins/contacttask && echo $pwd && go mod tidy && go build -buildmode=plugin -gcflags="all=-N -l" -o contacttask.so association.go && cd ../../
 
 plugin:
-	go build -buildmode=plugin -o plugins/contactdevice/contactdevice.so plugins/contactdevice/association.go
-	go build -buildmode=plugin -o plugins/contacttask/contacttask.so plugins/contacttask/association.go
+	cd ./plugins/contactdevice && echo $pwd && go mod tidy && go build -buildmode=plugin -o contactdevice.so association.go && cd ../../
+
+	cd ./plugins/contacttask && echo $pwd && go mod tidy && go build -buildmode=plugin -o contacttask.so association.go && cd ../../
